@@ -11,7 +11,7 @@
                         <title>{{ release.name }}</title>
                         <description><![CDATA[{{ release.body | markdownify }}]]></description>
                         <pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
-                        {% for asset in release.assets limit:1 %}
+                        {% for asset in release.assets limit:1 offset:1 %}
                             <enclosure
                                 url="{{ asset.browser_download_url }}"
                                 sparkle:version="{{ release.tag_name | remove_first:'v' }}"
