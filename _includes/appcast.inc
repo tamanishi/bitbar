@@ -9,7 +9,7 @@
                 {% unless release.prerelease and page.release_only %}
                     <item>
                         <title>{{ release.name }}</title>
-                        <description><![CDATA[{{ release.body | markdownify }}]]></description>
+                        <description><![CDATA[{% assign links = release.body | markdownify | split:'<a href="' %}{{ links[0] }}{% for link in links offset:1 %}<a href="{% assign href = link | split:'">' | first %}{% unless href contains '://' %}https://github.com/matryer/bitbar/blob/{{ release.tag_name }}/{% endunless %}{{ link }}{% endfor %}]]></description>
                         <pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
                         {% for asset in release.assets limit:1 %}
                             <enclosure
